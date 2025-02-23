@@ -27,5 +27,26 @@ class MovementInfo(MovementBase):
     duration: str | None = None
     quantity_difference: int | None = None
     
+class MovementMessageData(BaseModel):
+    movement_id: str
+    warehouse_id: str
+    timestamp: str
+    event: str
+    product_id: str
+    quantity: int
+
+
+class MovementMessage(BaseModel):
+    id: str
+    source: str
+    specversion: str
+    type: str
+    datacontenttype: str
+    dataschema: str
+    time: int
+    subject: str
+    destination: str
+    data: MovementMessageData
+    
 class MovementInfoResponse(BaseResponse):
     payload: MovementInfo
