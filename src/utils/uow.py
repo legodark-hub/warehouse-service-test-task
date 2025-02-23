@@ -3,13 +3,16 @@ from abc import ABC, abstractmethod
 from types import TracebackType
 from typing import Any
 
+from src.repositories.movement import MovementRepository
+from src.repositories.warehouse import WarehouseRepository
 from src.database.database import async_session
 from src.utils.custom_types import AsyncFunc
 
 
 class AbstractUnitOfWork(ABC):
-    # repositories
-
+    movement: MovementRepository
+    warehouse: WarehouseRepository
+    
     @abstractmethod
     def __init__(self):
         raise NotImplementedError
@@ -42,7 +45,8 @@ class UnitOfWork(AbstractUnitOfWork):
 
     async def __aenter__(self) -> None:
         self.session = self.session_factory()
-        # reoisitories
+        self.movement = MovementRepository(self.session)
+        self.warehouse = WarehouseRepository(self.session)
 
     async def __aexit__(
         self,
