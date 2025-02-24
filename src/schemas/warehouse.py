@@ -5,9 +5,12 @@ from src.schemas.response import BaseResponse
 class WarehouseBase(BaseModel):
     warehouse_id: str
     product_id: str
+    
+    
+class WarehouseProductQuantity(BaseModel):
     quantity: int
 
-class WarehouseDB(WarehouseBase):
+class WarehouseDB(WarehouseBase, WarehouseProductQuantity):
     id: int
 
     class Config:
@@ -15,3 +18,7 @@ class WarehouseDB(WarehouseBase):
         
 class WarehouseResponse(BaseResponse):
     payload: WarehouseBase
+    
+class WarehouseQuantityResponse(BaseResponse):
+    payload: WarehouseProductQuantity
+    
