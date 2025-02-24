@@ -15,7 +15,7 @@ class WarehouseService(BaseService):
         warehouse_id = movement_message["data"]["warehouse_id"]
         product_id = movement_message["data"]["product_id"]
         quantity = movement_message["data"]["quantity"]
-        event = movement_message["event"]
+        event = movement_message['data']["event"]
 
         current_quantity = await self.uow.warehouse.get_quantity(
             warehouse_id, product_id
