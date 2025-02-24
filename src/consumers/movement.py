@@ -6,6 +6,7 @@ from faststream.kafka.fastapi import Logger
 from src.api.services.movement import MovementService
 from src.api.services.warehouse import WarehouseService
 from src.schemas.movement import MovementMessage
+from src.utils.uow import transaction_mode
 
 kafka_router = KafkaRouter("localhost:9092")
 
@@ -34,7 +35,7 @@ async def hello_http():
     await kafka_router.broker.publish(movement_data, "movement")
     return "Hello, HTTP!"
 
-
+@transaction_mode
 @kafka_router.subscriber("movement")
 async def movement_consumer(
     m: MovementMessage,
