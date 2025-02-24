@@ -13,6 +13,6 @@ class Movement(Base):
     event: Mapped[str]
     source: Mapped[str]
     warehouse_id: Mapped[str]
-    timestamp: Mapped[datetime]
+    timestamp: Mapped[str]
     product_id: Mapped[str]
     quantity: Mapped[int]
