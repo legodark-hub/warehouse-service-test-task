@@ -6,9 +6,9 @@ class WarehouseService(BaseService):
     base_repository = "warehouse"
     
     @transaction_mode
-    async def get_product_quantity(self, warehouse_id: str, product_id: str):
+    async def get_product_quantity(self, warehouse_id: str, product_id: str) -> int | None:
         quantity = await self.uow.warehouse.get_quantity(warehouse_id, product_id)
-        return {"quantity": quantity}
+        return quantity
     
     @transaction_mode
     async def change_product_quantity(self, movement_message: dict):
