@@ -31,10 +31,13 @@ class MovementService(BaseService):
                 ),
                 "arrival_time": str(get_value_or_none(arrival_movement, "timestamp")),
                 "duration": str(
-                    
+                    timedelta(
+                        seconds=(
                             get_value_or_none(arrival_movement, "timestamp")
                             - get_value_or_none(departure_movement, "timestamp")
-                        )
+                        ).total_seconds()
+                    )
+                )
                 if departure_movement and arrival_movement
                 else None,
                 "quantity_difference": get_value_or_none(arrival_movement, "quantity")
