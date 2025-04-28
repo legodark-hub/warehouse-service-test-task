@@ -1,7 +1,6 @@
 from datetime import datetime
 from src.utils.service import BaseService
 from src.utils.uow import transaction_mode
-from fastapi import HTTPException, status
 
 
 class MovementService(BaseService):
@@ -46,15 +45,6 @@ class MovementService(BaseService):
         
     @transaction_mode
     async def save_movement_info(self, movement_message: dict):
-        existing_movement = await self.uow.movement.get_movement(
-            movement_message["data"]["movement_id"], movement_message["data"]["event"]
-        )
-        if existing_movement:
-            raise HTTPException(
-                status_code=status.HTTP_400_BAD_REQUEST,
-                detail="Movement with given ID and event already exists.",
-            )
-
         movement_data = {
             "movement_id": movement_message["data"]["movement_id"],
             "event": movement_message["data"]["event"],
