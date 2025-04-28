@@ -8,7 +8,7 @@ class MovementBase(BaseModel):
     event: str
     source: str
     warehouse_id: str
-    timestamp: str
+    timestamp: datetime
     product_id: str
     quantity: int
 
