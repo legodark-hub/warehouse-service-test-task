@@ -7,5 +7,6 @@ class Warehouse(Base):
     
     id: Mapped[int] = mapped_column(primary_key=True)
     warehouse_id: Mapped[str]
-    product_id: Mapped[str]
+    warehouse_code: Mapped[str]
+    product: Mapped[str]
     quantity: Mapped[int]
