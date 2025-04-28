@@ -1,4 +1,3 @@
-from datetime import datetime
 from src.utils.service import BaseService
 from src.utils.uow import transaction_mode
 
@@ -47,7 +46,7 @@ class MovementService(BaseService):
     async def save_movement_info(self, movement_message: dict):
         movement_data = {
             "movement_id": movement_message["data"]["movement_id"],
-            "event": movement_message["data"]["event"],
+            "event": movement_message["event"],
             "source": movement_message["source"],
             "warehouse_id": movement_message["data"]["warehouse_id"],
             "timestamp": movement_message["data"]["timestamp"],
