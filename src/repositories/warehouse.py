@@ -30,9 +30,10 @@ class WarehouseRepository(SQLAlchemyRepository):
         await self.session.execute(query)
         await self.session.commit()
 
-    async def get_quantity(self, warehouse_id: str, product_id: str) -> int | None:
+    async def get_quantity(self, warehouse_id: str, product_id: str) -> int:
         query = select(Warehouse.quantity).where(
             Warehouse.warehouse_id == warehouse_id, Warehouse.product_id == product_id
         )
         result = await self.session.execute(query)
-        return result.scalar_one_or_none()
+        quantity = result.scalar_one_or_none()
+        return quantity if quantity is not None else 0
